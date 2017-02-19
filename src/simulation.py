@@ -3,7 +3,7 @@ from src import drone
 class Simulation:
 
     def __init___(self):
-        pass
+        self.turn = 0
 
     def extractData(self, pathToInput):
         with open(pathToInput, 'r') as file:
@@ -35,11 +35,12 @@ class Simulation:
             self.drones = [drone.Drone(self) for k in range(self.n_drones)]
 
     def simulate(self):
-        for turn in range(self.n_turns):
-            self.solve_turn(self)
+        while self.turn < self.n_turns:
+            self.solve_turn()
             for drone in self.drones:
                 drone.update()
+            self.turn += 1
 
-    def solve_turn(simulation):
+    def solve_turn(self):
         #TODO
         pass
