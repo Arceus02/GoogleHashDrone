@@ -1,6 +1,10 @@
 from src import simulation
+from src import solver_example
 
-simulation = simulation.Simulation()
-simulation.extractData("../inputs/test.in")
+solver = solver_example.SolverExample(0, 10)
+sim = simulation.Simulation(solver)
+sim.extractData("../inputs/test.in")
+sim.simulate()
 
-print(simulation.getOutput())
+with open("../outputs/test.txt", 'w') as file:
+    file.write(sim.getOutput())
