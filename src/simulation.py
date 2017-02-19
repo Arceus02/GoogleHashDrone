@@ -2,8 +2,10 @@ from src import drone
 
 class Simulation:
 
-    def __init___(self):
+    def __init___(self, solver):
+        self.solver = solver
         self.turn = 0
+        self.tasksDone = []
 
     def extractData(self, pathToInput):
         with open(pathToInput, 'r') as file:
@@ -35,12 +37,14 @@ class Simulation:
             self.drones = [drone.Drone(self) for k in range(self.n_drones)]
 
     def simulate(self):
+        self.solver.init_solver(self)
         while self.turn < self.n_turns:
-            self.solve_turn()
+            self.tasksDone.append([])
+            self.solver.solve_turn()
             for drone in self.drones:
                 drone.update()
             self.turn += 1
 
-    def solve_turn(self):
-        #TODO
+    def getOutput(self):
+        # TODO
         pass
